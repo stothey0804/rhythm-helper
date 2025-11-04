@@ -12,11 +12,14 @@ export interface TempoProps {
   bpm?: number;
 }
 
-export type NoteType = "note" | "rest";
+export type NoteType = "normal" | "rest" | "triplet";
+
+// 음표의 길이 단위
+export type NoteTime = 1 | 0.75 | 0.5 | 0.375 | 0.25 | 0.1875 | 0.125 | 0.0625;
 
 export interface Note {
   type: NoteType;
-  time: number;
+  time: NoteTime;
 }
 
 export type BarData = Array<Note>;

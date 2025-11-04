@@ -8,5 +8,5 @@ export const MIN_TEMPO = 10;
 export const MAX_TEMPO = 400;
 
 // 메시지
-export const CONFIRM_MSG_METER_CHANGE_KR =
-  "박자가 바뀌면 악보가 초기화 됩니다.";
+export const CONFIRM_MSG_METER_CHANGE_KR = "박자가 바뀌면 악보가 초기화 돼요";
+export const CONFRIM_MSG_BAR_CLEAR_KR = "악보를 초기화 할까요?";
