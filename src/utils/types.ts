@@ -1,7 +1,6 @@
-export interface BarProps {
+export interface NoteButtonProps {
   meter?: number;
   maxBeat?: number;
-  tempo?: number;
 }
 
 export interface TimeSignatureProps {
@@ -19,3 +18,7 @@ export interface Note {
   type: NoteType;
   time: number;
 }
+
+export type BarData = Array<Note>;
+
+export type BarArray = Array<BarData>;

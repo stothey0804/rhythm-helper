@@ -1,29 +1,27 @@
-import { memo, useEffect, useState } from "react";
-import {
-  DEFAULT_MAX_BEAT,
-  DEFAULT_METER,
-  DEFAULT_TEMPO,
-  type BarProps,
-  type Note,
-} from "../utils";
+import { memo } from "react";
+import { useBarStore } from "../utils/store";
+import type { Note } from "../utils";
 
-type BarArray = Array<Note>;
+const Bar = memo(() => {
+  const bar = useBarStore((state) => state.currentBar);
 
-const Bar = memo(
-  ({
-    meter = DEFAULT_METER,
-    maxBeat = DEFAULT_MAX_BEAT,
-    tempo = DEFAULT_TEMPO,
-  }: BarProps) => {
-    const [barList, setBarList] = useState<BarArray>([]);
-    // barList 계산 식
+  return (
+    <div>
+      <ul>
+        {bar.length > 0 && bar.map((item: Note) => <BarNoteItem note={item} />)}
+      </ul>
+    </div>
+  );
+});
 
-    useEffect(() => {
-      console.log(meter, maxBeat, tempo);
-    }, []);
-
-    return <div></div>;
-  }
-);
+const BarNoteItem = ({ note }: { note: Note }) => {
+  const { type, time } = note || {};
+  return (
+    <li>
+      {type}
+      {time}
+    </li>
+  );
+};
 
 export default Bar;
