@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import type { BarArray, BarData } from "./types";
-import { DEFAULT_MAX_BEAT, DEFAULT_METER, DEFAULT_TEMPO } from "./constants";
+import {
+  DEFAULT_MAX_BEAT,
+  DEFAULT_METER,
+  DEFAULT_TEMPO,
+  MAX_TEMPO,
+  MIN_TEMPO,
+} from "./constants";
 
 type BarState = {
   barList: BarArray;
@@ -12,12 +18,13 @@ type BarAction = {
   updateBarList: (barList: BarState["barList"]) => void;
   updateCurrentBar: (currentBar: BarState["currentBar"]) => void;
   updateBarIndex: (barIndex: BarState["barIndex"]) => void;
+  resetBarList: () => void;
 };
 
 export const useBarStore = create<BarState & BarAction>((set, get) => ({
   barList: [],
   barIndex: 0,
-  currentBar: [],
+  currentBar: [{ type: "note", time: 0.25 }],
   updateBarList: (newList) => {
     set(() => ({
       barList: newList,
@@ -41,6 +48,11 @@ export const useBarStore = create<BarState & BarAction>((set, get) => ({
       set({ currentBar: barList[newIndex] });
     }
   },
+  resetBarList: () => {
+    set({ currentBar: [] });
+    set({ barList: [[]] });
+    set({ barIndex: 0 });
+  },
 }));
 
 type GlobalState = {
@@ -57,27 +69,41 @@ type GlobalAction = {
   updateMaxBeat: (maxBeat: GlobalState["maxBeat"]) => void;
   updateTempo: (tempo: GlobalState["tempo"]) => void;
   updatebarCount: (barCount: GlobalState["barCount"]) => void;
+  increaseTempo: () => void;
+  decreaseTempo: () => void;
 };
 
-export const useGlobalStore = create<GlobalState & GlobalAction>((set) => ({
-  isPlaying: false,
-  meter: DEFAULT_METER,
-  maxBeat: DEFAULT_MAX_BEAT,
-  tempo: DEFAULT_TEMPO,
-  barCount: 1,
-  toggleIsPlaying: () => {
-    set((state) => ({ isPlaying: !state.isPlaying }));
-  },
-  updateMeter: (newState) => {
-    set(() => ({ meter: newState }));
-  },
-  updateMaxBeat: (newState) => {
-    set(() => ({ maxBeat: newState }));
-  },
-  updateTempo: (newState) => {
-    set(() => ({ tempo: newState }));
-  },
-  updatebarCount: (newState) => {
-    set(() => ({ barCount: newState }));
-  },
-}));
+export const useGlobalStore = create<GlobalState & GlobalAction>(
+  (set, get) => ({
+    isPlaying: false,
+    meter: DEFAULT_METER,
+    maxBeat: DEFAULT_MAX_BEAT,
+    tempo: DEFAULT_TEMPO,
+    barCount: 1,
+    toggleIsPlaying: () => {
+      set((state) => ({ isPlaying: !state.isPlaying }));
+    },
+    updateMeter: (newState) => {
+      set(() => ({ meter: newState }));
+    },
+    updateMaxBeat: (newState) => {
+      set(() => ({ maxBeat: newState }));
+    },
+    updateTempo: (newState) => {
+      set(() => ({ tempo: newState }));
+    },
+    updatebarCount: (newState) => {
+      set(() => ({ barCount: newState }));
+    },
+    increaseTempo: () => {
+      if (get().tempo < MAX_TEMPO) {
+        set((state) => ({ tempo: state.tempo + 1 }));
+      }
+    },
+    decreaseTempo: () => {
+      if (get().tempo > MIN_TEMPO) {
+        set((state) => ({ tempo: state.tempo - 1 }));
+      }
+    },
+  })
+);
