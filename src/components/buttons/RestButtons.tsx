@@ -1,0 +1,59 @@
+import { memo, useState } from "react";
+import type { Note, NoteTime, NoteType } from "../../utils";
+import { useBarStore } from "../../utils/store";
+
+const RestButtons = () => {
+  const [isDotted, setIsDotted] = useState(false);
+
+  const handleDotToggle = () => {
+    setIsDotted((prevState) => !prevState);
+  };
+
+  return (
+    <div>
+      <button onClick={handleDotToggle}>.</button>
+      <RestList isDotted={isDotted} />
+    </div>
+  );
+};
+
+const RestList = ({ isDotted = false }: { isDotted?: boolean }) => {
+  const namePrefix = isDotted ? "점" : "";
+  return (
+    <div>
+      <RestItem time={isDotted ? 0.75 : 0.5} name={`${namePrefix}2분쉼표`} />
+      <RestItem time={isDotted ? 0.375 : 0.25} name={`${namePrefix}4분쉼표`} />
+      <RestItem
+        time={isDotted ? 0.1875 : 0.125}
+        name={`${namePrefix}8분쉼표`}
+      />
+      <RestItem
+        time={isDotted ? 0.09375 : 0.0625}
+        name={`${namePrefix}16분쉼표`}
+      />
+      {isDotted && <RestItem time={0.03125} name={`32분쉼표`} />}
+    </div>
+  );
+};
+
+const RestItem = memo(
+  ({ time, name }: { time: NoteTime; name: string; type?: NoteType }) => {
+    const { addNote } = useBarStore.getState();
+
+    const handleBtnClick = () => {
+      const thisNote: Note = {
+        type: "rest",
+        time: time,
+      };
+      addNote(thisNote);
+    };
+
+    return (
+      <button onClick={handleBtnClick}>
+        {time} {name}
+      </button>
+    );
+  }
+);
+
+export default RestButtons;

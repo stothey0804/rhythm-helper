@@ -4,16 +4,15 @@ import {
   ActionButtons,
   BarList,
   Contents,
-  NoteButtons,
   Tempo,
   TimeSignature,
 } from "./components/layouts";
 import {
-  ClearButton,
-  NoteButton,
+  NoteButtons,
+  RestButtons,
   PlayButton,
-  RestButton,
   RollbackButton,
+  ClearButton,
 } from "./components/buttons";
 
 function App() {
@@ -23,10 +22,8 @@ function App() {
         <TimeSignature />
         <Tempo />
         <BarList />
-        <NoteButtons>
-          <NoteButton />
-          <RestButton />
-        </NoteButtons>
+        <NoteButtons />
+        <RestButtons />
         <ActionButtons>
           <RollbackButton />
           <PlayButton />
