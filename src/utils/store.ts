@@ -92,7 +92,7 @@ type GlobalState = {
 };
 
 type GlobalAction = {
-  toggleIsPlaying: (isPlaying: GlobalState["isPlaying"]) => void;
+  toggleIsPlaying: () => void;
   updateMeter: (meter: GlobalState["meter"]) => void;
   updateMaxBeat: (maxBeat: GlobalState["maxBeat"]) => void;
   updateTempo: (tempo: GlobalState["tempo"]) => void;
