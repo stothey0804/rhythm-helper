@@ -4,7 +4,8 @@ import { CONFIRM_MSG_METER_CHANGE_KR } from "../../utils";
 
 const TimeSignature = ({}) => {
   // 기준박과 최대 갯수
-  const { meter, maxBeat } = useGlobalStore.getState();
+  const meter = useGlobalStore((state) => state.meter);
+  const maxBeat = useGlobalStore((state) => state.maxBeat);
   const [isLayerOpen, setIsLayerOpen] = useState(false);
 
   const toggleIsLayerOpen = () => {
@@ -22,8 +23,10 @@ const TimeSignature = ({}) => {
 };
 
 const TimeLayer = ({ toggleIsLayerOpen }: { toggleIsLayerOpen: Function }) => {
-  const { updateMeter, updateMaxBeat } = useGlobalStore.getState();
-  const { currentBar, resetBarList } = useBarStore.getState();
+  const updateMeter = useGlobalStore((state) => state.updateMeter);
+  const updateMaxBeat = useGlobalStore((state) => state.updateMaxBeat);
+  const currentBar = useBarStore((state) => state.currentBar);
+  const resetBarList = useBarStore((state) => state.resetBarList);
 
   const handleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.dataset.value);

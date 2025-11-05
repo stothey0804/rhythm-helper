@@ -1,7 +1,7 @@
 import { useBarStore } from "../../utils/store";
 
 const RollbackButton = () => {
-  const { removeNote } = useBarStore.getState();
+  const removeNote = useBarStore((state) => state.removeNote);
 
   const handleBtnClick = () => {
     removeNote();

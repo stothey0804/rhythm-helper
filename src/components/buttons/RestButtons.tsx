@@ -1,6 +1,7 @@
 import { memo, useState } from "react";
 import type { Note, NoteTime, NoteType } from "../../utils";
 import { useBarStore } from "../../utils/store";
+import { nanoid } from "nanoid";
 
 const RestButtons = () => {
   const [isDotted, setIsDotted] = useState(false);
@@ -38,10 +39,11 @@ const RestList = ({ isDotted = false }: { isDotted?: boolean }) => {
 
 const RestItem = memo(
   ({ time, name }: { time: NoteTime; name: string; type?: NoteType }) => {
-    const { addNote } = useBarStore.getState();
+    const addNote = useBarStore((state) => state.addNote);
 
     const handleBtnClick = () => {
       const thisNote: Note = {
+        id: nanoid(),
         type: "rest",
         time: time,
       };

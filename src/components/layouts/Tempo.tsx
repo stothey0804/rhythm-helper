@@ -3,7 +3,8 @@ import { useGlobalStore } from "../../utils/store";
 import { MAX_TEMPO, MIN_TEMPO, useLongPress } from "../../utils";
 
 const Tempo = () => {
-  const { meter, tempo } = useGlobalStore.getState();
+  const meter = useGlobalStore((state) => state.meter);
+  const tempo = useGlobalStore((state) => state.tempo);
 
   const [isLayerOpen, setIsLayerOpen] = useState(false);
 
@@ -22,8 +23,10 @@ const Tempo = () => {
 };
 
 const TempoLayer = ({ toggleIsLayerOpen }: { toggleIsLayerOpen: Function }) => {
-  const { tempo, increaseTempo, decreaseTempo, updateTempo } =
-    useGlobalStore.getState();
+  const tempo = useGlobalStore((state) => state.tempo);
+  const increaseTempo = useGlobalStore((state) => state.increaseTempo);
+  const decreaseTempo = useGlobalStore((state) => state.decreaseTempo);
+  const updateTempo = useGlobalStore((state) => state.updateTempo);
 
   const increaseProps = useLongPress(increaseTempo);
   const decreaseProps = useLongPress(decreaseTempo);

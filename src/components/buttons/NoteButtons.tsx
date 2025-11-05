@@ -52,7 +52,7 @@ const NoteItem = memo(
     name: string;
     type?: NoteType;
   }) => {
-    const { addNote } = useBarStore.getState();
+    const addNote = useBarStore((state) => state.addNote);
 
     const handleBtnClick = () => {
       const thisNote: Note = {
