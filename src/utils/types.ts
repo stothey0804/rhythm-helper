@@ -28,6 +28,7 @@ export type NoteTime =
   | 0.03125;
 
 export interface Note {
+  id: string;
   type: NoteType;
   time: NoteTime;
 }

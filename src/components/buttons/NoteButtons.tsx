@@ -1,6 +1,7 @@
 import { memo, useState } from "react";
 import type { Note, NoteTime, NoteType } from "../../utils";
 import { useBarStore } from "../../utils/store";
+import { nanoid } from "nanoid";
 
 const NoteButtons = () => {
   const [isDotted, setIsDotted] = useState(false);
@@ -55,6 +56,7 @@ const NoteItem = memo(
 
     const handleBtnClick = () => {
       const thisNote: Note = {
+        id: nanoid(),
         type: type,
         time: time,
       };

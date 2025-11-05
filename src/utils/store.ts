@@ -28,10 +28,7 @@ type BarAction = {
 export const useBarStore = create<BarState & BarAction>((set, get) => ({
   barList: [],
   barIndex: 0,
-  currentBar: [
-    { type: "normal", time: 0.1875 },
-    { type: "normal", time: 0.0625 },
-  ],
+  currentBar: [],
   updateBarList: (newList) => {
     set(() => ({
       barList: newList,

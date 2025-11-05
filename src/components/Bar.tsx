@@ -8,7 +8,8 @@ const Bar = memo(() => {
   return (
     <div>
       <ul>
-        {bar.length > 0 && bar.map((item: Note) => <BarNoteItem note={item} />)}
+        {bar.length > 0 &&
+          bar.map((item: Note) => <BarNoteItem key={item.id} note={item} />)}
       </ul>
     </div>
   );
