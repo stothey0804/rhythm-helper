@@ -11,8 +11,10 @@ const NoteButtons = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleDotToggle}>.</button>
+    <div className="flex gap-2 overflow-x-scroll ">
+      <button className="bg-indigo-300" onClick={handleDotToggle}>
+        .
+      </button>
       <NoteList isDotted={isDotted} />
     </div>
   );
@@ -21,7 +23,7 @@ const NoteButtons = () => {
 const NoteList = ({ isDotted = false }: { isDotted?: boolean }) => {
   const namePrefix = isDotted ? "점" : "";
   return (
-    <div>
+    <div className="flex flex-row gap-2">
       <NoteItem time={isDotted ? 0.75 : 0.5} name={`${namePrefix}2분음표`} />
       <NoteItem time={isDotted ? 0.375 : 0.25} name={`${namePrefix}4분음표`} />
       <NoteItem
@@ -64,8 +66,11 @@ const NoteItem = memo(
     };
 
     return (
-      <button onClick={handleBtnClick}>
-        {time} {name}
+      <button
+        className="flex basis-sm text-sm size-20"
+        onClick={handleBtnClick}
+      >
+        {name}
       </button>
     );
   }

@@ -11,7 +11,7 @@ const RestButtons = () => {
   };
 
   return (
-    <div>
+    <div className="flex gap-2 overflow-x-scroll">
       <button onClick={handleDotToggle}>.</button>
       <RestList isDotted={isDotted} />
     </div>
@@ -21,7 +21,7 @@ const RestButtons = () => {
 const RestList = ({ isDotted = false }: { isDotted?: boolean }) => {
   const namePrefix = isDotted ? "점" : "";
   return (
-    <div>
+    <div className="flex flex-row gap-2">
       <RestItem time={isDotted ? 0.75 : 0.5} name={`${namePrefix}2분쉼표`} />
       <RestItem time={isDotted ? 0.375 : 0.25} name={`${namePrefix}4분쉼표`} />
       <RestItem
@@ -51,8 +51,11 @@ const RestItem = memo(
     };
 
     return (
-      <button onClick={handleBtnClick}>
-        {time} {name}
+      <button
+        className="flex basis-sm text-sm size-20"
+        onClick={handleBtnClick}
+      >
+        {name}
       </button>
     );
   }

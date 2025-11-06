@@ -70,16 +70,16 @@ export const usePlayBar = (callback: () => Array<HTMLLIElement | null>) => {
     const nowEl = elementArray[index];
     if (nowEl) {
       if (prevEl) {
-        prevEl.style.background = "transparent";
+        prevEl.classList.remove("color-change");
       }
-      nowEl.style.background = "white";
+      nowEl.classList.add("color-change");
     }
   }, []);
 
   const clearBackground = useCallback(() => {
     const elementArray = callback();
     elementArray.forEach((elem) => {
-      if (elem) elem.style.background = "transparent";
+      if (elem) elem.classList.remove("color-change");
     });
   }, []);
 

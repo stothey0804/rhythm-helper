@@ -23,8 +23,8 @@ const Bar = memo(() => {
   }, [isPlaying]);
 
   return (
-    <div>
-      <ul>
+    <div className="bg-white rounded-lg" style={{ height: 120 }}>
+      <ul className="flex flex-none justify-start w-full h-full overflow-hidden">
         {bar.length > 0 &&
           bar.map((item: Note, idx) => (
             <BarNoteItem
@@ -44,9 +44,8 @@ const BarNoteItem = forwardRef<HTMLLIElement, { note: Note }>(
   ({ note }, ref) => {
     const { type, time } = note || {};
     return (
-      <li ref={ref}>
-        {type}
-        {time}
+      <li className="flex list-none text-indigo-950 h-full" ref={ref}>
+        {type} {time}
       </li>
     );
   }

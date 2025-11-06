@@ -19,11 +19,17 @@ function App() {
   return (
     <>
       <Contents>
-        <TimeSignature />
-        <Tempo />
+        <Wrapper>
+          <TimeSignature />
+          <Tempo />
+        </Wrapper>
         <BarList />
-        <NoteButtons />
-        <RestButtons />
+        <Wrapper>
+          <NoteButtons />
+        </Wrapper>
+        <Wrapper>
+          <RestButtons />
+        </Wrapper>
         <ActionButtons>
           <RollbackButton />
           <PlayButton />
@@ -33,5 +39,9 @@ function App() {
     </>
   );
 }
+
+const Wrapper = ({ children }: { children?: any }) => {
+  return <div className="flex justify-between my-4">{children}</div>;
+};
 
 export default App;
