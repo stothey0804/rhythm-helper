@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import type { Note, NoteTime, NoteType } from "../../utils";
 import { useBarStore } from "../../utils/store";
 import { nanoid } from "nanoid";
+import "./buttons.css";
 
 const NoteButtons = ({ type = "normal" }: { type?: NoteType }) => {
   const [isDotted, setIsDotted] = useState(false);
@@ -30,22 +31,33 @@ const NoteList = ({
   const namePrefix = isDotted ? "dotted-" : "";
   return (
     <div className="flex flex-row gap-2">
-      <NoteItem time={isDotted ? 0.75 : 0.5} name={`${namePrefix}${type}-2`} />
       <NoteItem
+        type={type}
+        time={isDotted ? 0.75 : 0.5}
+        name={`${namePrefix}${type}-2`}
+      />
+      <NoteItem
+        type={type}
         time={isDotted ? 0.375 : 0.25}
         name={`${namePrefix}${type}-4`}
       />
       <NoteItem
+        type={type}
         time={isDotted ? 0.1875 : 0.125}
         name={`${namePrefix}${type}-8`}
       />
       <NoteItem
+        type={type}
         time={isDotted ? 0.09375 : 0.0625}
         name={`${namePrefix}${type}-16`}
       />
       {!isDotted && (
         <>
-          <NoteItem time={0.03125} name={`${namePrefix}${type}-32`} />
+          <NoteItem
+            type={type}
+            time={0.03125}
+            name={`${namePrefix}${type}-32`}
+          />
           {/* <NoteItem time={0.25} name="셋잇단음표" type="triplet" /> */}
         </>
       )}
@@ -76,9 +88,11 @@ const NoteItem = memo(
 
     return (
       <button
-        className={`flex basis-sm text-sm size-20 note ${name}`}
+        className={`flex justify-center basis-sm text-sm size-20 note-btn`}
         onClick={handleBtnClick}
-      ></button>
+      >
+        <div className={`note note--${type} ${name}`}></div>
+      </button>
     );
   }
 );

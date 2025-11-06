@@ -1,0 +1,19 @@
+.bar-list {
+  padding: 1em;
+  justify-content: space-evenly;
+}
+
+.bar-note {
+  background-image: url("../assets/note_sprite.png");
+  background-repeat: no-repeat;
+  background-size: auto 100px;
+  background-position: 0 0;
+  width: 100%;
+  height: 59px;
+  margin: 0 0.5em;
+  align-self: center;
+}
+
+.bar-note--rest {
+  margin-top: 0.6em;
+}

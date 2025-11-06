@@ -29,7 +29,7 @@
     background: transparent;
   }
   100% {
-    background: var(--color-indigo-400);
+    background: var(--color-indigo-200);
   }
 }
 @keyframes color-change {
@@ -37,6 +37,6 @@
     background: transparent;
   }
   100% {
-    background: var(--color-indigo-400);
+    background: var(--color-indigo-200);
   }
 }

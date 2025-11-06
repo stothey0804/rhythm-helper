@@ -15,7 +15,7 @@ const Tempo = () => {
   return (
     <div>
       <button onClick={() => toggleIsLayerOpen()}>
-        {meter} = {tempo}
+        {meter === 4 ? "♩" : "♪"} = {tempo}
       </button>
       {isLayerOpen && <TempoLayer toggleIsLayerOpen={toggleIsLayerOpen} />}
     </div>
