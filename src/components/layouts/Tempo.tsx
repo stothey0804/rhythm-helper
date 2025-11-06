@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useGlobalStore } from "../../utils/store";
 import { MAX_TEMPO, MIN_TEMPO, useLongPress } from "../../utils";
+import "./modal.css";
 
 const Tempo = () => {
   const meter = useGlobalStore((state) => state.meter);
@@ -52,30 +53,50 @@ const TempoLayer = ({ toggleIsLayerOpen }: { toggleIsLayerOpen: Function }) => {
   );
 
   return (
-    <div>
-      <div>
-        <button {...decreaseProps}>{"-"}</button>
-        <input
-          type="number"
-          value={tempo}
-          onChange={handleTempoChange}
-          onBlur={handleTempoBlur}
-        />
-        <button {...increaseProps}>{"+"}</button>
+    <>
+      {/* Backdrop */}
+      <div className="modal-backdrop" onClick={() => toggleIsLayerOpen()} />
+
+      {/* Modal */}
+      <div className="modal-container">
+        <h3 className="modal-title">템포 설정</h3>
+
+        <div className="tempo-controls">
+          <button {...decreaseProps} className="tempo-btn">
+            -
+          </button>
+          <input
+            type="number"
+            value={tempo}
+            onChange={handleTempoChange}
+            onBlur={handleTempoBlur}
+            className="tempo-input"
+          />
+          <button {...increaseProps} className="tempo-btn">
+            +
+          </button>
+        </div>
+
+        <div className="tempo-slider-container">
+          <input
+            type="range"
+            min={MIN_TEMPO}
+            max={MAX_TEMPO}
+            value={tempo}
+            onChange={handleTempoChange}
+            className="tempo-slider"
+          />
+          <div className="tempo-range-labels">
+            <span>{MIN_TEMPO}</span>
+            <span>{MAX_TEMPO}</span>
+          </div>
+        </div>
+
+        <button onClick={() => toggleIsLayerOpen()} className="modal-btn-primary">
+          확인
+        </button>
       </div>
-      <div>
-        <input
-          type="range"
-          min={MIN_TEMPO}
-          max={MAX_TEMPO}
-          value={tempo}
-          onChange={handleTempoChange}
-        ></input>
-      </div>
-      <div>
-        <button onClick={() => toggleIsLayerOpen()}>닫기</button>
-      </div>
-    </div>
+    </>
   );
 };
 

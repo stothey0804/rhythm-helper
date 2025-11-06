@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useBarStore, useGlobalStore } from "../../utils/store";
 import { CONFIRM_MSG_METER_CHANGE_KR } from "../../utils";
+import "./modal.css";
 
 const TimeSignature = ({}) => {
   // 기준박과 최대 갯수
@@ -46,36 +47,81 @@ const TimeLayer = ({ toggleIsLayerOpen }: { toggleIsLayerOpen: Function }) => {
   };
 
   return (
-    <div>
-      <div>
-        <button onClick={handleBtnClick} data-value={"1/4"}>
-          1/4
-        </button>
-        <button onClick={handleBtnClick} data-value={"2/4"}>
-          2/4
-        </button>
-        <button onClick={handleBtnClick} data-value={"3/4"}>
-          3/4
-        </button>
-        <button onClick={handleBtnClick} data-value={"4/4"}>
-          4/4
+    <>
+      {/* Backdrop */}
+      <div className="modal-backdrop" onClick={() => toggleIsLayerOpen()} />
+
+      {/* Modal */}
+      <div className="modal-container">
+        <h3 className="modal-title">박자 선택</h3>
+
+        <div className="time-signature-grid">
+          <button
+            onClick={handleBtnClick}
+            data-value={"1/4"}
+            className="time-signature-btn"
+          >
+            1/4
+          </button>
+          <button
+            onClick={handleBtnClick}
+            data-value={"2/4"}
+            className="time-signature-btn"
+          >
+            2/4
+          </button>
+          <button
+            onClick={handleBtnClick}
+            data-value={"3/4"}
+            className="time-signature-btn"
+          >
+            3/4
+          </button>
+          <button
+            onClick={handleBtnClick}
+            data-value={"4/4"}
+            className="time-signature-btn"
+          >
+            4/4
+          </button>
+        </div>
+
+        <div className="time-signature-grid">
+          <button
+            onClick={handleBtnClick}
+            data-value={"3/8"}
+            className="time-signature-btn"
+          >
+            3/8
+          </button>
+          <button
+            onClick={handleBtnClick}
+            data-value={"6/8"}
+            className="time-signature-btn"
+          >
+            6/8
+          </button>
+          <button
+            onClick={handleBtnClick}
+            data-value={"9/8"}
+            className="time-signature-btn"
+          >
+            9/8
+          </button>
+          <button
+            onClick={handleBtnClick}
+            data-value={"12/8"}
+            className="time-signature-btn"
+          >
+            12/8
+          </button>
+        </div>
+
+        <button onClick={() => toggleIsLayerOpen()} className="modal-btn-primary">
+          취소
         </button>
       </div>
-      <div>
-        <button onClick={handleBtnClick} data-value={"3/8"}>
-          3/8
-        </button>
-        <button onClick={handleBtnClick} data-value={"6/8"}>
-          6/8
-        </button>
-        <button onClick={handleBtnClick} data-value={"9/8"}>
-          9/8
-        </button>
-        <button onClick={handleBtnClick} data-value={"12/8"}>
-          12/8
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 
