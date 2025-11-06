@@ -16,7 +16,7 @@ const Tempo = () => {
   return (
     <div>
       <button onClick={() => toggleIsLayerOpen()}>
-        {meter === 4 ? "♩" : "♪"} = {tempo}
+        {meter === 4 ? "♩" : "♩."} = {tempo}
       </button>
       {isLayerOpen && <TempoLayer toggleIsLayerOpen={toggleIsLayerOpen} />}
     </div>
@@ -92,7 +92,10 @@ const TempoLayer = ({ toggleIsLayerOpen }: { toggleIsLayerOpen: Function }) => {
           </div>
         </div>
 
-        <button onClick={() => toggleIsLayerOpen()} className="modal-btn-primary">
+        <button
+          onClick={() => toggleIsLayerOpen()}
+          className="modal-btn-primary"
+        >
           확인
         </button>
       </div>

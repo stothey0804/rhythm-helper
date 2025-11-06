@@ -55,11 +55,14 @@ export const useLongPress = (
  */
 export const usePlayBar = (callback: () => Array<HTMLLIElement | null>) => {
   const tempo = useGlobalStore((state) => state.tempo);
+  const meter = useGlobalStore((state) => state.meter);
   const maxBeat = useGlobalStore((state) => state.maxBeat);
   const currentBar = useBarStore((state) => state.currentBar);
 
-  // 현재 마디의 총 길이 (ms)
-  const BarTime = (60 / tempo) * maxBeat * 1000;
+  // note.time은 온음표를 1로 하는 비율이므로
+  // BarTime은 온음표 1개의 실제 시간 (ms)
+  // 온음표 = 4분음표 4개
+  const BarTime = (60 / tempo) * 4 * 1000;
   // current bar 의 각 요소 길이 배열
   const timeArray = currentBar.map((item: Note) => item.time * BarTime);
 
