@@ -1,6 +1,7 @@
 import { useRef, useCallback } from "react";
 import { useBarStore, useGlobalStore } from "./store";
 import type { Note } from "./types";
+import { cleanupAudioContext, playMetronomeClick } from "./audio";
 
 /**
  * 버튼을 오래 누르면 콜백이 반복 실행되는 훅
@@ -64,17 +65,26 @@ export const usePlayBar = (callback: () => Array<HTMLLIElement | null>) => {
 
   const timeoutRef = useRef<number | null>(null);
 
-  const elementAction = useCallback((index: number) => {
-    const elementArray = callback();
-    const prevEl = elementArray[index - 1] || null;
-    const nowEl = elementArray[index];
-    if (nowEl) {
-      if (prevEl) {
-        prevEl.classList.remove("color-change");
+  const action = useCallback(
+    (index: number) => {
+      const elementArray = callback();
+      const prevEl = elementArray[index - 1] || null;
+      const nowEl = elementArray[index];
+      if (nowEl) {
+        if (prevEl) {
+          prevEl.classList.remove("color-change");
+        }
+        nowEl.classList.add("color-change");
+
+        // 음표 재생 시 클릭 소리 재생
+        const currentNote = currentBar[index];
+        if (currentNote) {
+          playMetronomeClick(currentNote.type);
+        }
       }
-      nowEl.classList.add("color-change");
-    }
-  }, []);
+    },
+    [currentBar]
+  );
 
   const clearBackground = useCallback(() => {
     const elementArray = callback();
@@ -85,6 +95,7 @@ export const usePlayBar = (callback: () => Array<HTMLLIElement | null>) => {
 
   const stop = useCallback(() => {
     clearBackground();
+    cleanupAudioContext();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
@@ -106,7 +117,7 @@ export const usePlayBar = (callback: () => Array<HTMLLIElement | null>) => {
       }
 
       // action
-      elementAction(index);
+      action(index);
       index++;
 
       // 현재 음표의 시간만큼 대기 후 다음 재생

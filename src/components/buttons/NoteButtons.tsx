@@ -12,7 +12,7 @@ const NoteButtons = ({ type = "normal" }: { type?: NoteType }) => {
   };
 
   return (
-    <div className="flex gap-2 overflow-x-scroll ">
+    <div className="flex gap-2">
       <button className="bg-indigo-300" onClick={handleDotToggle}>
         .
       </button>
@@ -30,7 +30,7 @@ const NoteList = ({
 }) => {
   const namePrefix = isDotted ? "dotted-" : "";
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-2 overflow-x-scroll">
       <NoteItem
         type={type}
         time={isDotted ? 0.75 : 0.5}
