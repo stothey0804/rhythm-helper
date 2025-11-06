@@ -5,11 +5,11 @@
   background-size: auto 100px;
   background-position: 0 0;
   width: 100%;
-  height: clac(var(--spacing) * 20 - 1.2em);
+  height: 59px;
 }
 
 .note--rest {
-  margin-top: 0.6em;
+  margin-top: 10px;
 }
 
 /* 일반 음표 (위 행) */
