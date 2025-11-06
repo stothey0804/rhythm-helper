@@ -25,7 +25,7 @@ const Bar = memo(() => {
 
   return (
     <div className="bg-white rounded-lg" style={{ height: 120 }}>
-      <ul className="bar-list flex flex-none justify-start w-full h-full overflow-hidden">
+      <ul className="bar-list flex flex-none justify-start w-full h-full overflow-x-scroll">
         {bar.length > 0 &&
           bar.map((item: Note, idx) => (
             <BarNoteItem

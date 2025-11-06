@@ -2,7 +2,7 @@
 
 @layer base {
   #root {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
@@ -12,6 +12,7 @@
     #root {
       padding: 1rem;
       max-width: 100%;
+      min-width: 100%;
     }
   }
 }
