@@ -47,6 +47,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+button.note {
+  background-color: var(--color-indigo-50);
+}
+
 button:hover {
   color: var(--color-indigo-400);
 }

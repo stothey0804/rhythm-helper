@@ -9,7 +9,6 @@ import {
 } from "./components/layouts";
 import {
   NoteButtons,
-  RestButtons,
   PlayButton,
   RollbackButton,
   ClearButton,
@@ -25,10 +24,10 @@ function App() {
         </Wrapper>
         <BarList />
         <Wrapper>
-          <NoteButtons />
+          <NoteButtons type="normal" />
         </Wrapper>
         <Wrapper>
-          <RestButtons />
+          <NoteButtons type="rest" />
         </Wrapper>
         <ActionButtons>
           <RollbackButton />

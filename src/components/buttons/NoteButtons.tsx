@@ -3,7 +3,7 @@ import type { Note, NoteTime, NoteType } from "../../utils";
 import { useBarStore } from "../../utils/store";
 import { nanoid } from "nanoid";
 
-const NoteButtons = () => {
+const NoteButtons = ({ type = "normal" }: { type?: NoteType }) => {
   const [isDotted, setIsDotted] = useState(false);
 
   const handleDotToggle = () => {
@@ -15,29 +15,38 @@ const NoteButtons = () => {
       <button className="bg-indigo-300" onClick={handleDotToggle}>
         .
       </button>
-      <NoteList isDotted={isDotted} />
+      <NoteList isDotted={isDotted} type={type} />
     </div>
   );
 };
 
-const NoteList = ({ isDotted = false }: { isDotted?: boolean }) => {
-  const namePrefix = isDotted ? "점" : "";
+const NoteList = ({
+  isDotted = false,
+  type,
+}: {
+  isDotted?: boolean;
+  type: NoteType;
+}) => {
+  const namePrefix = isDotted ? "dotted-" : "";
   return (
     <div className="flex flex-row gap-2">
-      <NoteItem time={isDotted ? 0.75 : 0.5} name={`${namePrefix}2분음표`} />
-      <NoteItem time={isDotted ? 0.375 : 0.25} name={`${namePrefix}4분음표`} />
+      <NoteItem time={isDotted ? 0.75 : 0.5} name={`${namePrefix}${type}-2`} />
+      <NoteItem
+        time={isDotted ? 0.375 : 0.25}
+        name={`${namePrefix}${type}-4`}
+      />
       <NoteItem
         time={isDotted ? 0.1875 : 0.125}
-        name={`${namePrefix}8분음표`}
+        name={`${namePrefix}${type}-8`}
       />
       <NoteItem
         time={isDotted ? 0.09375 : 0.0625}
-        name={`${namePrefix}16분음표`}
+        name={`${namePrefix}${type}-16`}
       />
       {!isDotted && (
         <>
-          <NoteItem time={0.03125} name="32분음표" />
-          <NoteItem time={0.25} name="셋잇단음표" type="triplet" />
+          <NoteItem time={0.03125} name={`${namePrefix}${type}-32`} />
+          {/* <NoteItem time={0.25} name="셋잇단음표" type="triplet" /> */}
         </>
       )}
     </div>
@@ -47,7 +56,7 @@ const NoteList = ({ isDotted = false }: { isDotted?: boolean }) => {
 const NoteItem = memo(
   ({
     time,
-    name,
+    name = "",
     type = "normal",
   }: {
     time: NoteTime;
@@ -67,11 +76,9 @@ const NoteItem = memo(
 
     return (
       <button
-        className="flex basis-sm text-sm size-20"
+        className={`flex basis-sm text-sm size-20 note ${name}`}
         onClick={handleBtnClick}
-      >
-        {name}
-      </button>
+      ></button>
     );
   }
 );
